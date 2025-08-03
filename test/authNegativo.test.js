@@ -45,8 +45,8 @@ describe('Testes NEGATIVOS da API de Login', function () {
         const res = await fazerLogin(email, 'SenhaErrada');
         expect(res.status).to.equal(401);
         expect(res.body.mensagem).to.include('Credenciais inválidas');
-
-        it('Deve bloquear usuário após 3 tentativas de senha errada', async () => {
+      });
+      it('Deve bloquear usuário após 3 tentativas de senha errada', async () => {
           let resposta;
           for (let i = 0; i < 3; i++) {
             resposta = await fazerLogin(email, 'SenhaErrada');
@@ -54,7 +54,6 @@ describe('Testes NEGATIVOS da API de Login', function () {
           expect(resposta.status).to.equal(403);
           expect(resposta.body.mensagem).to.include('Usuário bloqueado');
         });
-      });
     });
     describe('GET /historico-login', () => {
       it('Não deve acessar histórico de login sem token', async () => {

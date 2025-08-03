@@ -76,6 +76,8 @@ exports.recuperarSenha = (req, res) => {
     return res.status(400).json({ mensagem: 'A nova senha deve ser diferente da atual.' });
   }
   user.senha = bcrypt.hashSync(novaSenha, 10);
+  user.tentativasInvalidas = 0;
+  user.bloqueadoAte = null;
   return res.json({ mensagem: 'Senha redefinida com sucesso.' });
 };
 
@@ -91,4 +93,4 @@ exports.desbloquearUsuario = (req, res) => {
   user.bloqueadoAte = null;
   user.tentativasInvalidas = 0;
   return res.json({ mensagem: 'Usuário desbloqueado com sucesso.' });
-}; 
+};

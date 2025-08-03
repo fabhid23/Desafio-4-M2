@@ -1,0 +1,6 @@
+body { display: flex; min-height: 100vh; flex-direction: column; background-color: #f4f4f8; } 
+main { flex: 1 0 auto; padding-top: 30px; } 
+.card { padding: 20px; } 
+.card .card-title { margin-bottom: 20px; } 
+.input-field label { color: #0d47a1; } 
+button.btn { width: 100%; }

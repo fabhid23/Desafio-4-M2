@@ -23,7 +23,10 @@ router.get('/historico-login', authMiddleware, (req, res) => {
   res.json({ historico: req.user.historicoLogin });
 });
 
+// Gerenciamento de Usuários
+router.delete('/users/email', authMiddleware, userController.deleteEmail);
+
 // Swagger docs (a ser implementado)
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-module.exports = router; 
+module.exports = router;

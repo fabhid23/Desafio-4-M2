@@ -71,6 +71,15 @@ function resetUsers() {
   users.length = 0;
 }
 
+function deleteUserEmail(userId) {
+  const user = findUserById(userId);
+  if (user) {
+    user.email = null; // Or set to an empty string, depending on desired behavior
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   users,
   createUser,
@@ -78,5 +87,6 @@ module.exports = {
   findUserByUsername,
   findUserById,
   updateUser,
-  resetUsers
-}; 
+  resetUsers,
+  deleteUserEmail
+};

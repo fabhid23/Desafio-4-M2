@@ -160,6 +160,48 @@
         }
       }
     },
+    "/users/email": {
+      "delete": {
+        "summary": "Deletar email do usuário",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteEmail"
+              },
+              "examples": {
+                "deleteEmail": {
+                  "summary": "Deletar email",
+                  "value": { "email": "usuario@empresa.com" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email deletado com sucesso",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "summary": "Email deletado",
+                    "value": { "mensagem": "Email usuario@empresa.com deletado com sucesso." }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Dados inválidos" },
+          "403": { "description": "Não autorizado" },
+          "404": { "description": "Usuário não encontrado" }
+        }
+      }
+    },
     "/recuperar-senha": {
       "post": {
         "summary": "Recuperação de senha",
@@ -347,10 +389,17 @@
   },
   "components": {
     "schemas": {
+      "DeleteEmail": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "format": "email" }
+        },
+        "required": ["email"]
+      },
       "Cadastro": {
         "type": "object",
         "properties": {
-          "email": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
           "username": { "type": "string" },
           "senha": { "type": "string" },
           "nome": { "type": "string" },
@@ -380,4 +429,4 @@
       }
     }
   }
-} 
+}

@@ -94,3 +94,30 @@ exports.desbloquearUsuario = (req, res) => {
   user.tentativasInvalidas = 0;
   return res.json({ mensagem: 'Usuário desbloqueado com sucesso.' });
 };
+
+const deleteEmailSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+exports.deleteEmail = (req, res) => {
+  const { error } = deleteEmailSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ mensagem: 'Dados inválidos', detalhes: error.details });
+  }
+  const { email } = req.body;
+  const user = require('../models/userModel').findUserByEmail(email);
+  if (!user) {
+    return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+  }
+  if (user.id !== req.user.id) {
+    return res.status(403).json({ mensagem: 'Você não tem permissão para deletar este email.' });
+  }
+  // In a real application, you would mark the email as deleted or remove it from the database.
+  const userModel = require('../models/userModel');
+  const deleted = userModel.deleteUserEmail(user.id);
+  if (deleted) {
+    return res.json({ mensagem: `Email ${email} deletado com sucesso.` });
+  } else {
+    return res.status(500).json({ mensagem: 'Erro ao deletar email.' });
+  }
+};

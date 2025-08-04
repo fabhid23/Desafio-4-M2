@@ -9,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'segredo';
 const JWT_EXPIRATION = '10m';
 const MAX_ATTEMPTS = 3;
 const BLOCK_TIME_MINUTES = 5;
-const MAX_SESSIONS = 3;
+
 
 function getUserByLogin(login) {
   return login.includes('@') ? findUserByEmail(login) : findUserByUsername(login);
@@ -47,10 +47,7 @@ exports.login = (req, res) => {
   // Reset tentativas
   user.tentativasInvalidas = 0;
   user.bloqueadoAte = null;
-  // Sessões
-  if (user.sessoes.length >= MAX_SESSIONS) {
-    return res.status(403).json({ mensagem: 'Limite de sessões simultâneas atingido.' });
-  }
+  
   // Novo dispositivo
   let novoDispositivo = false;
   if (dispositivo && !user.dispositivos.includes(dispositivo)) {

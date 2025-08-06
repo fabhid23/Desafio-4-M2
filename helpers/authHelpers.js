@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../src/app.js');
+//const app = require('../src/app.js');
 
 function gerarCredenciaisAleatorias() {
   const random = Math.floor(Math.random() * 1000000);
@@ -14,7 +14,7 @@ function gerarCredenciaisAleatorias() {
   };
 }
 
-const apiUrl = process.env.BASE_URL;
+const apiUrl = process.env.API_BASE_URL
 
 async function cadastrarUsuario(dados) {
   const resposta = await request(apiUrl)

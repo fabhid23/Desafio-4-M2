@@ -149,4 +149,8 @@ ehthumbs.db
 Thumbs.db 
 
 #test
+#test
 mochawesome-report/
+reports/
+screenshots/
+cypress/screenshots/ 

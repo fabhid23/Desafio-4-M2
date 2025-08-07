@@ -126,7 +126,6 @@ npm install
 Verifique o arquivo `.env` (crie se não existir):
 ```env
 API_BASE_URL=http://localhost:3004
-PORT=3000
 ```
 
 ### 3. **Execução**
@@ -150,13 +149,20 @@ npm start
 # Desenvolvimento
 npm start              # Inicia o servidor frontend
 npm run start-api      # Inicia a API backend
-npm run dev            # Inicia o servidor em desenvolvimento (nodemon)
 
-# Testes
-npm test               # Executa os testes da API
+#Instalar as dependências necessárias
+npm install mochawesome-report
+npm install cypress
+npm install uuid
+npm install chai
+npm install supertest
+npm install mocha
+
+
+
+# Testes de API
+npm test              # Executa os testes da API
 npm run test:report    # Executa os testes e gera relatório HTML
-npx cypress open       # Abre o Cypress para testes E2E
-npx cypress run        # Executa os testes Cypress em modo headless
 ```
 
 > **Nota:** O relatório HTML dos testes será gerado na pasta `mochawesome-report` após rodar `npm run test:report`. Para visualizar, abra o arquivo `mochawesome-report/mochawesome.html` no seu navegador.

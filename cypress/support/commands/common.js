@@ -7,7 +7,7 @@ Cypress.Commands.add('cadastraUsuarioRandom', () => {
     cy.get('#username').focus().type('teste' + uuid)        
     cy.get('#senha').focus().type('teste123')
     cy.get('#nome').focus().type('Teste de Usuário')
-    cy.get('#dataNascimento').focus().type('21/10/1990')
+    cy.get('#dataNascimento').focus().type('1990-10-21')
     cy.get('#nomePai').focus().type('Teste Pai')
     cy.get('#nomeMae').focus().type('Teste Mãe')
     cy.contains('.btn', 'Cadastrar').click() 
@@ -25,12 +25,12 @@ Cypress.Commands.add('preencheUsuario', (usuario, senha) => {
       cy.get('#senha').focus().type(senha)
 })
 
-Cypress.Commands.add('recuperarSenha', (email, senha, nascimento) => {
+Cypress.Commands.add('recuperarSenha', (email, senha, nascimento, nomePai, nomeMae) => {
     cy.visit('/#/recuperar-senha')    
     cy.get('#email').focus().click().type(email)    
     cy.get('#dataNascimento').focus().type(nascimento)
-    cy.get('#nomePai').focus().type('Teste Pai')
-    cy.get('#nomeMae').focus().type('Teste Mãe')
+    cy.get('#nomePai').focus().type(nomePai)
+    cy.get('#nomeMae').focus().type(nomeMae)
     cy.get('#novaSenha').focus().type(senha)
     cy.get('.btn').click() 
 })

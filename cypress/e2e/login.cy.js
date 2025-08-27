@@ -18,8 +18,9 @@ describe('Login', () => {
   })
 
   it('Login com dados INVÁLIDOS não deve permitir acessar tela do perfil do usuário', () => {
+    cy.recuperarSenha('usuario@empresa.com', 'teste1234', '1990-01-01', 'João Teste', 'Maria Teste') 
     //Act
-    cy.preencheUsuario('usuario1', 'invalida')
+    cy.preencheUsuario('usuario@empresa.com', 'invalida')
     cy.contains('.btn', 'Entrar').click() 
 
     //Asserts
@@ -38,7 +39,7 @@ describe('Login', () => {
     cy.verificarMensagensNoToast('Usuário bloqueado')      
 
     //After     
-    cy.recuperarSenha('usuario1@empresa.com', 'teste123', '01/01/1990') 
+    cy.recuperarSenha('usuario@empresa.com', 'teste123', '1990-01-01', 'João Teste', 'Maria Teste') 
   })
 
   it('Recuperar senha', () => {
@@ -46,8 +47,8 @@ describe('Login', () => {
    cy.cadastraUsuarioRandom().then(uuid => {
     
     //Act 
-    const usuario = `teste` + uuid + `@empresa.com`     
-    cy.recuperarSenha(usuario, 'Senha123', '21/10/1990')
+    const usuario = `teste` + uuid + `@empresa.com`    
+    cy.recuperarSenha(usuario, 'Senha123', '1990-10-21', 'Teste Pai', 'Teste Mãe')
     })            
 
     //Assert
